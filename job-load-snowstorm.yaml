@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: load-snowstorm
+spec:
+  template:
+    spec:
+      containers:
+      - name: load-snowstorm
+        image: 351912770473.dkr.ecr.us-east-1.amazonaws.com/snowstorm
+        command: [ "sh", "-c"]
+        args:
+          - java -Xms2g -Xmx4g -jar snowstorm-2.1.0.jar --delete-indices --import=/tmp/SnomedCT_Argentina-EditionRelease_PRODUCTION_20181130T120000Z.zip;
+      restartPolicy: Never
+  backoffLimit: 4
