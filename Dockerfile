@@ -16,4 +16,4 @@ EXPOSE 8080
 
 COPY config /opt/snowstorm/config
 
-CMD ["java","-jar","snowstorm-2.1.0.jar"]
+CMD ["java","-Xms2g","-Xmx2g","-jar","snowstorm-2.1.0.jar","--snowstorm.rest-api.readonly=true"]
