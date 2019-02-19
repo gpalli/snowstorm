@@ -83,11 +83,7 @@ kubectl create -f job-load-snowstorm.yaml
 7) Deploy container and expose services
 
 ```
-kubectl create -f app.yaml -f service.yaml
-```
-
-```
-kubectl apply -f service.yaml
+kubectl apply -f app.yaml -f service.yaml
 ```
 
 8) Browse snowstorm api
