@@ -1,0 +1,26 @@
+version: '2.1'
+services:
+  es:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
+    container_name: elasticsearch
+    environment:
+      - "ES_JAVA_OPTS=-Xms4g -Xmx4g"
+    volumes:
+      - ./elastic/data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+
+
+  snowstorm:
+    build: .
+    image: gpalli/snowstorm
+    environment:
+      - "ELASTICSEARCH_URLS=http://es:9200"
+    ports:
+      - 8080:8080
+
+
+networks:
+  default:
+    external:
+      name: snowstorm

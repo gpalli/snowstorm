@@ -16,7 +16,10 @@ spec:
     spec:
       containers:
       - name: snowstorm
-        image: 351912770473.dkr.ecr.us-east-1.amazonaws.com/snowstorm
+        image: gpalli/snowstorm
+        envFrom:
+          - configMapRef:
+            name: snowstorm-config
         ports:
         - name: http
           containerPort: 8080

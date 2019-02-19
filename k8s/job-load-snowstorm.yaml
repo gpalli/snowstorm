@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: load-snowstorm
+spec:
+  template:
+    spec:
+      containers:
+      - name: load-snowstorm
+        image: gpalli/snowstorm
+        envFrom:
+          - configMapRef:
+            name: snowstorm-config
+        command: [ "sh", "-c"]
+        args:
+          - wget -O /tmp/snomedct_rf2_file.zip $S3_PRESIGN_SNOMEDCT_RF2_FILE;
+          - java -Xms2g -Xmx4g -jar snowstorm.jar --elasticsearch_urls=$ELASTICSEARCH_URLS --delete-indices --import=/tmp/snomedct_rf2_file.zip;
+      restartPolicy: Never
+  backoffLimit: 4
